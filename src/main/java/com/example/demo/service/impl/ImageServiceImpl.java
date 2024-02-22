@@ -24,8 +24,8 @@ public class ImageServiceImpl implements ImageService {
         Image newImage = new Image();
         newImage.setData(data);
 
-        String imageId = imageRepository.save(newImage).getId();
+        Image image = imageRepository.save(newImage);
 
-        return imageId;
+        return image.getId();
     }
 }
