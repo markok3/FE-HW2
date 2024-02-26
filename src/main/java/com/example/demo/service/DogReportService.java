@@ -8,5 +8,8 @@ import java.util.List;
 public interface DogReportService {
     List<DogReport> getAllDogReports();
     DogReport createDogReport(DogReportDTO dogReportDTO);
+    List<DogReportDTO> findByUserId(String userId);
+    DogReportDTO getDogReport(String id);
+    void deleteDogReport(String id);
 
 }

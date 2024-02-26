@@ -27,4 +27,18 @@ public class DogReportController {
         return this.dogReportService.createDogReport(dogReport);
     }
 
+    @GetMapping("/myReports/{userId}")
+    private List<DogReportDTO> findByUserId(@PathVariable String userId){
+        return this.dogReportService.findByUserId(userId);
+    }
+
+    @GetMapping("/{id}")
+    private DogReportDTO getDogReport(@PathVariable String id){
+        return this.dogReportService.getDogReport(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private void deleteDogReport(@PathVariable String id){
+        this.dogReportService.deleteDogReport(id);
+    }
 }

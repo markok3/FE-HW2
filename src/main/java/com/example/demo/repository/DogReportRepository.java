@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DogReportRepository extends JpaRepository<DogReport, String> {
     List<DogReport> findAll();
+    List<DogReport> findByUserId(String userId);
 }

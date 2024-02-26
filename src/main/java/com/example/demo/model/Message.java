@@ -1,8 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.example.demo.model.dto.MessageDTO;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,6 +10,7 @@ import java.time.LocalDateTime;
 @Data
 public class Message {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @ManyToOne
@@ -22,14 +22,25 @@ public class Message {
     private String messageText;
 
     public Message() {
+        this.dateTime = LocalDateTime.now();
     }
 
-//    public Message(String id, Chat chat, LocalDateTime dateTime, String senderId, String receiverId, String messageText) {
-//        this.id = id;
-//        this.chat = chat;
-//        this.dateTime = dateTime;
-//        this.senderId = senderId;
-//        this.receiverId = receiverId;
-//        this.messageText = messageText;
-//    }
+    public static Message fromDTO(MessageDTO messageDTO) {
+        Message message = new Message();
+        message.setSenderId(messageDTO.getSenderId());
+        message.setReceiverId(messageDTO.getReceiverId());
+        message.setMessageText(messageDTO.getMessageText());
+        return message;
+    }
+
+    public MessageDTO toDTO() {
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setSenderId(this.senderId);
+        messageDTO.setReceiverId(this.receiverId);
+        messageDTO.setMessageText(this.messageText);
+        messageDTO.setDateTime(this.dateTime);
+        return messageDTO;
+    }
+
+
 }
